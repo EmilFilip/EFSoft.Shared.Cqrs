@@ -30,15 +30,6 @@ stages:
       displayName: 'Build $(buildConfiguration)'
 
     - task: DotNetCoreCLI@2
-      displayName: 'Run unit tests'
-      inputs:
-        command: 'test'
-        arguments: --no-restore --configuration $(buildConfiguration) 
-        publishTestResults: false
-        projects: '**/*.UnitTests.csproj'
-        testRunTitle: 'Unit-Test-Run-$(Build.BuildId)'
-
-    - task: DotNetCoreCLI@2
       displayName: Build Apps
       inputs:
         command: 'build'
