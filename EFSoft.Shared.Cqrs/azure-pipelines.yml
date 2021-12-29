@@ -45,8 +45,6 @@ stages:
         projects: '**/*.csproj'
         arguments: '--configuration $(BuildConfiguration)'
 
-    - script: printenv
-
     - task: DotNetCoreCLI@2
       displayName: Pack Nuget Package
       inputs:
