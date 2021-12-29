@@ -66,3 +66,4 @@ stages:
         versioningScheme: 'byEnvVar'
         versionEnvVar: 'PackageVersion'
         publishVstsFeed: 'emilfilip3'
+        allowPackageConflicts: true
