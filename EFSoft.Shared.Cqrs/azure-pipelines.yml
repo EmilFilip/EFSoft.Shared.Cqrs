@@ -26,9 +26,6 @@ stages:
       inputs:
         restoreSolution: '$(solution)'
 
-    - script: dotnet build --configuration $(buildConfiguration)
-      displayName: 'Build $(buildConfiguration)'
-
     - task: DotNetCoreCLI@2
       displayName: Build Apps
       inputs:
