@@ -51,11 +51,9 @@ stages:
       displayName: Pack Nuget Package
       inputs:
         command: 'pack'
-        arguments: '--configuration $(buildConfiguration)'
         packagesToPack: '**/*.csproj'
-        nobuild: true
         versioningScheme: 'byEnvVar'
-        versionEnvVar: 'PackageVersion'
+        versionEnvVar: 'version'
 
     - task: DotNetCoreCLI@2
       displayName: Push Nuget Package
