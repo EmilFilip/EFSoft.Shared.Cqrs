@@ -1,0 +1,51 @@
+﻿trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Build_Stage
+  displayName: 
+  jobs:
+  - job: BuildNuget
+    displayName: Build Nuget packages
+    variables:
+      BuildConfiguration: release
+    steps:
+
+    - task: DotNetCoreCLI@2
+      displayName: Restore Packages
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+        feedsToUse: 'select'
+
+    - task: DotNetCoreCLI@2
+      displayName: Build Apps
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--configuration $(BuildConfiguration)'
+
+    - script: printenv
+
+    - task: DotNetCoreCLI@2
+      displayName: Pack Nuget Package
+      inputs:
+        command: 'pack'
+        arguments: '--configuration $(buildConfiguration)'
+        packagesToPack: '**/*.csproj'
+        nobuild: true
+        versioningScheme: 'byEnvVar'
+        versionEnvVar: PackageVersion
+
+    - task: DotNetCoreCLI@2
+      displayName: Push Nuget Package
+      inputs:
+        command: 'push'
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+        nuGetFeedType: 'internal'
+        versioningScheme: 'byEnvVar'
+        versionEnvVar: PackageVersion
+        publishVstsFeed: 'EFSoft-Feed'
