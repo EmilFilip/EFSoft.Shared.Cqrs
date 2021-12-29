@@ -55,7 +55,7 @@ stages:
         packagesToPack: '**/*.csproj'
         nobuild: true
         versioningScheme: 'byEnvVar'
-        versionEnvVar: PackageVersion
+        versionEnvVar: 'PackageVersion'
 
     - task: DotNetCoreCLI@2
       displayName: Push Nuget Package
@@ -64,5 +64,5 @@ stages:
         packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
         nuGetFeedType: 'internal'
         versioningScheme: 'byEnvVar'
-        versionEnvVar: PackageVersion
+        versionEnvVar: 'PackageVersion'
         publishVstsFeed: 'EFSoft-Feed'
