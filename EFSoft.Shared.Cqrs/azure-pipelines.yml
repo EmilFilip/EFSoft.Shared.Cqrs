@@ -14,12 +14,29 @@ stages:
       BuildConfiguration: release
     steps:
 
-    - task: DotNetCoreCLI@2
-      displayName: Restore Packages
+    - task: UseDotNet@2
+      displayName: 'Use .NET 6 SDK'
       inputs:
-        command: 'restore'
-        projects: '**/*.csproj'
-        feedsToUse: 'select'
+        packageType: 'sdk'
+        version: '6.0.x'
+        includePreviewVersions: true
+
+    - task: NuGetCommand@2
+      displayName: 'Restore NuGet Packages'
+      inputs:
+        restoreSolution: '$(solution)'
+
+    - script: dotnet build --configuration $(buildConfiguration)
+      displayName: 'Build $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Run unit tests'
+      inputs:
+        command: 'test'
+        arguments: --no-restore --configuration $(buildConfiguration) 
+        publishTestResults: false
+        projects: '**/*.UnitTests.csproj'
+        testRunTitle: 'Unit-Test-Run-$(Build.BuildId)'
 
     - task: DotNetCoreCLI@2
       displayName: Build Apps
