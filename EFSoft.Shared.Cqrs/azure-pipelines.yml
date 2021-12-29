@@ -29,6 +29,18 @@ stages:
       inputs:
         restoreSolution: '$(solution)'
 
+    - script: dotnet build --configuration $(buildConfiguration)
+      displayName: 'Build $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Run unit tests'
+      inputs:
+        command: 'test'
+        arguments: --no-restore --configuration $(buildConfiguration) 
+        publishTestResults: false
+        projects: '**/*.UnitTests.csproj'
+        testRunTitle: 'Unit-Test-Run-$(Build.BuildId)'
+
     - task: DotNetCoreCLI@2
       displayName: Build Apps
       inputs:
@@ -52,4 +64,4 @@ stages:
         nuGetFeedType: 'internal'
         versioningScheme: 'byEnvVar'
         versionEnvVar: 'PackageVersion'
-        publishVstsFeed: 'EFSoft-Feed'
+        publishVstsFeed: EFSoft-Feed
