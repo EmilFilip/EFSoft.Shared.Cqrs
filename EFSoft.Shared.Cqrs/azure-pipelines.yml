@@ -54,7 +54,7 @@ stages:
         command: 'pack'
         packagesToPack: '**/*.csproj'
         nobuild: true
-        versioningScheme: 'byEnvVar'
+        versioningScheme: byEnvVar
         versionEnvVar: 'version'
 
     - task: DotNetCoreCLI@2
@@ -63,7 +63,7 @@ stages:
         command: 'push'
         packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
         nuGetFeedType: 'internal'
-        versioningScheme: 'byEnvVar'
-        versionEnvVar: 'PackageVersion'
+        versioningScheme: byEnvVar
+        versionEnvVar: 'version'
         publishVstsFeed: 'emilfilip3'
         allowPackageConflicts: true
