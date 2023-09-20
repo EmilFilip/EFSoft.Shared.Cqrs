@@ -1,4 +1,4 @@
-﻿namespace EFSoft.Customers.Api.Configuration;
+﻿namespace EFSoft.Shared.Cqrs.Configuration;
 
 [ExcludeFromCodeCoverage]
 public static class Services

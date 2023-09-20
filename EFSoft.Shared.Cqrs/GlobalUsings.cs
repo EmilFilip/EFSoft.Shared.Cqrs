@@ -2,7 +2,7 @@
 global using System.Reflection;
 global using System.Text.Json;
 
-global using EFSoft.Customers.Application.Behaviors;
+global using EFSoft.Shared.Cqrs.Behaviors;
 
 global using FluentValidation;
 

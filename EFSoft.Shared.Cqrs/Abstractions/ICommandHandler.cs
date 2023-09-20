@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.CQRS.Commands;
+﻿namespace EFSoft.Shared.Cqrs.Abstractions;
 
 public interface ICommandHandler<in TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
     where TRequest : ICommand<TResponse>

@@ -1,4 +1,4 @@
-﻿namespace EFSoft.Customers.Application.Behaviors;
+﻿namespace EFSoft.Shared.Cqrs.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> :
     IPipelineBehavior<TRequest, TResponse>
