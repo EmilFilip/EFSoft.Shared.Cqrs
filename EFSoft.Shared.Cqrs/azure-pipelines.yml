@@ -18,7 +18,7 @@ stages:
     steps:
 
     - task: UseDotNet@2
-      displayName: 'Use .NET 6 SDK'
+      displayName: 'Use .NET 7 SDK'
       inputs:
         packageType: 'sdk'
         version: '7.0.x'
@@ -37,15 +37,6 @@ stages:
 
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: 'Build $(buildConfiguration)'
-
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'Run unit tests'
-    #   inputs:
-    #     command: 'test'
-    #     arguments: --no-restore --configuration $(buildConfiguration) 
-    #     publishTestResults: false
-    #     projects: '**/*.UnitTests.csproj'
-    #     testRunTitle: 'Unit-Test-Run-$(Build.BuildId)'
 
     - task: DotNetCoreCLI@2
       displayName: Build Apps

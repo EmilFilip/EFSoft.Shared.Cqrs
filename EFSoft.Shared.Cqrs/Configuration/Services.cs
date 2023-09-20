@@ -3,7 +3,7 @@
 [ExcludeFromCodeCoverage]
 public static class Services
 {
-    public static IServiceCollection Register(
+    public static IServiceCollection RegisterCqrs(
                     this IServiceCollection services,
                     Assembly assembly)
     {
