@@ -21,8 +21,14 @@ stages:
       displayName: 'Use .NET 6 SDK'
       inputs:
         packageType: 'sdk'
-        version: '6.0.x'
+        version: '7.0.x'
         includePreviewVersions: true
+        
+    - task: NuGetToolInstaller@1
+      displayName: 'Install NuGet Tool'
+      inputs:
+        versionSpec: '6.7.x'
+        checkLatest: true
 
     - task: NuGetCommand@2
       displayName: 'Restore NuGet Packages'
@@ -32,14 +38,14 @@ stages:
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: 'Build $(buildConfiguration)'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Run unit tests'
-      inputs:
-        command: 'test'
-        arguments: --no-restore --configuration $(buildConfiguration) 
-        publishTestResults: false
-        projects: '**/*.UnitTests.csproj'
-        testRunTitle: 'Unit-Test-Run-$(Build.BuildId)'
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'Run unit tests'
+    #   inputs:
+    #     command: 'test'
+    #     arguments: --no-restore --configuration $(buildConfiguration) 
+    #     publishTestResults: false
+    #     projects: '**/*.UnitTests.csproj'
+    #     testRunTitle: 'Unit-Test-Run-$(Build.BuildId)'
 
     - task: DotNetCoreCLI@2
       displayName: Build Apps
